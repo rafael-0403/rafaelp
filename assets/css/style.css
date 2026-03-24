@@ -1268,3 +1268,79 @@ section {
     padding-right: 20px 15px;
   }
 }
+
+.custom-shadow {
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    0 0 0 5px rgba(255, 255, 255, 0.05);
+}
+
+.custom-shadow {
+  transition: 0.3s;
+}
+
+.custom-shadow:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(99, 102, 241, 0.5);
+}
+
+.custom-shadow {
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(99, 102, 241, 0.25);
+  transition: 0.3s;
+}
+
+.custom-shadow:hover {
+  transform: translateY(-6px);
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(99, 102, 241, 0.4);
+}
+
+.certificate-wrap {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 290px; /* FIXED HEIGHT */
+  background: #111;
+}
+
+.certificate-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* BIAR RAPI */
+  transition: 0.3s;
+}
+
+.certificate-wrap:hover img {
+  transform: scale(1.08);
+}
+
+.certificate-wrap::after {
+  content: "View";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.certificate-wrap:hover::after {
+  opacity: 1;
+}
+
+.certificate-item {
+  transition: 0.3s;
+}
+
+.certificate-item:hover {
+  transform: translateY(-5px);
+}
