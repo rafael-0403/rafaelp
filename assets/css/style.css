@@ -1345,3 +1345,36 @@ section {
   transform: translateY(-5px);
 }
 
+.badges-slider {
+  padding-top: 20px;
+}
+
+.badge-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+  min-height: 340px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.badge-card:hover {
+  transform: translateY(-5px);
+}
+
+.badge-card h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  min-height: 45px;
+}
+
+.badges-slider .swiper-slide {
+  height: auto;
+}
+
+.badges-slider .swiper-pagination {
+  margin-top: 25px;
+  position: relative;
+}

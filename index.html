@@ -24,6 +24,12 @@
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
@@ -79,50 +85,54 @@
 
   <main id="main">
 
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
-      <div class="container">
+  <!-- ======= About Section ======= -->
+  <section id="about" class="about">
+    <div class="container">
 
-        <div class="section-title">
-          <h2>About</h2>
-          <p>Hi, I am an Informatics Engineering graduate from Universitas Esa Unggul with a foundation in software development and IT support. I previously graduated from Cinta Kasih Tzu Chi Vocational School, majoring in Software Engineering (RPL). During school, I was actively involved in OSIS Journalism and the Tzu Shao team as part of the IT division. I have experience in web development, technical documentation, and digital content creation through academic, organizational, and professional activities. I am passionate about exploring new technologies and developing practical digital solutions.</p>
+      <!-- Menambahkan margin-bottom yang lebih kuat (mb-5) agar ada jarak ke foto -->
+      <div class="section-title mb-5" data-aos="fade-up">
+        <h2>About</h2>
+        <p style="line-height: 1.8;">
+          Hi, I am an Informatics Engineering graduate from Universitas Esa Unggul with a foundation in software development and IT support. I previously graduated from Cinta Kasih Tzu Chi Vocational School, majoring in Software Engineering (RPL). During school, I was actively involved in OSIS Journalism and the Tzu Shao team as part of the IT division. I have experience in web development, technical documentation, and digital content creation through academic, organizational, and professional activities. I am passionate about exploring new technologies and developing practical digital solutions.
+        </p>
+      </div>
+
+      <div class="row">
+        <!-- Foto Section -->
+        <div class="col-lg-4" data-aos="fade-right">
+          <!-- Menambahkan margin bottom pada mobile agar tidak menempel dengan teks di bawahnya saat layar kecil -->
+          <img src="assets/img/Rafael.jpeg" class="img-fluid rounded-circle custom-shadow mb-4 mb-lg-0" alt="Rafael Praseli">
         </div>
 
-        <div class="row">
-          <div class="col-lg-4" data-aos="fade-right">
-            <img src="assets/img/Rafael.jpeg" class="img-fluid rounded-circle custom-shadow" alt="">
-          </div>
-          <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-            <h3> IT Enthusiast &amp; IT Consultant.</h3>
-            <p class="fst-italic">
-              Informasi : 
-            </p>
-            <div class="row">
-              <div class="col-lg-6">
-                <ul>
-                  <!-- <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>21 Maret 2004</span></li> -->
-                  <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong><a href="https://trishanawasena.my.id/rafaelp/"><span>trishanawasena.my.id/rafaelp</span></a></li>
-                  <!-- <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong><a href="tel:+6281212744954"><span>+6281212744954</span></a></li> -->
-                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong><a href="mailto:rafael.praselioey@gmail.com"><span>rafael.praselioey@gmail.com</span></a></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Jakarta, Indonesia</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>22</span></li>
-                </ul>
-              </div>
-              <div class="col-lg-6">
-                <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>Bachelor of Computer Science</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Google Scholar:</strong><a href="https://scholar.google.com/citations?user=IgCP1EoAAAAJ&hl=id"><span>Rafael Praseli</span></a></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>ResearchGate:</strong><a href="https://www.researchgate.net/profile/Rafael-Praseli"><span>Rafael Praseli</span></a></li>
-                </ul>
-              </div>
+        <!-- Content Section -->
+        <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
+          <h3 style="color: #0563bb;">IT Enthusiast &amp; IT Consultant.</h3>
+          <p class="fst-italic" style="margin-bottom: 20px;">
+            Informasi Detail:
+          </p>
+          
+          <div class="row">
+            <div class="col-lg-6">
+              <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 12px;"><i class="bi bi-chevron-right" style="color: #0563bb;"></i> <strong>Website:</strong> <a href="https://trishanawasena.my.id/rafaelp/" target="_blank">trishanawasena.my.id/rafaelp</a></li>
+                <li style="margin-bottom: 12px;"><i class="bi bi-chevron-right" style="color: #0563bb;"></i> <strong>Email:</strong> <a href="mailto:rafael.praselioey@gmail.com">rafael.praselioey@gmail.com</a></li>
+                <li style="margin-bottom: 12px;"><i class="bi bi-chevron-right" style="color: #0563bb;"></i> <strong>City:</strong> <span>Jakarta, Indonesia</span></li>
+                <li style="margin-bottom: 12px;"><i class="bi bi-chevron-right" style="color: #0563bb;"></i> <strong>Age:</strong> <span>22</span></li>
+              </ul>
+            </div>
+            <div class="col-lg-6">
+              <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 12px;"><i class="bi bi-chevron-right" style="color: #0563bb;"></i> <strong>Degree:</strong> <span>Bachelor of Computer Science</span></li>
+                <li style="margin-bottom: 12px;"><i class="bi bi-chevron-right" style="color: #0563bb;"></i> <strong>Google Scholar:</strong> <a href="https://scholar.google.com/citations?user=IgCP1EoAAAAJ&hl=id" target="_blank">Rafael Praseli</a></li>
+                <li style="margin-bottom: 12px;"><i class="bi bi-chevron-right" style="color: #0563bb;"></i> <strong>ResearchGate:</strong> <a href="https://www.researchgate.net/profile/Rafael-Praseli" target="_blank">Rafael Praseli</a></li>
+              </ul>
             </div>
           </div>
         </div>
-        
       </div>
-    </section><!-- End About Section -->
-
-    
+      
+    </div>
+  </section><!-- End About Section -->
 
     <!-- ======= Skills Section ======= -->
     <section id="skills" class="skills section-bg">
@@ -189,23 +199,25 @@
       </div>
     </section><!-- End Skills Section -->
 
-    <!-- ======= Resume Section ======= -->
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <section id="resume" class="resume">
       <div class="container">
 
         <div class="section-title">
           <h2>Resume</h2>
-
-          <a href="https://drive.google.com/file/d/16xfLi6hMV-bARpFqYPyrQ4XoCD3wJ2hR/view?usp=sharing" class="btn btn-primary col-lg-1,5"><i class="bi bi-file-earmark-arrow-down"></i> Download CV</a>
+          <a href="https://drive.google.com/file/d/16xfLi6hMV-bARpFqYPyrQ4XoCD3wJ2hR/view?usp=sharing" class="btn btn-primary col-lg-1,5">
+            <i class="bi bi-file-earmark-arrow-down"></i> Download CV
+          </a>
         </div>
-        
 
         <div class="row">
+          <!-- Kolom Kiri: Summary & Education -->
           <div class="col-lg-6" data-aos="fade-up">
             <h3 class="resume-title">Sumary</h3>
             <div class="resume-item pb-0">
               <h4>Rafael Praseli</h4>
-              <p><em></em></p>
               <ul>
                 <li>Jakarta, Indonesia</li>
                 <li>rafael.praselioey@gmail.com</li>
@@ -217,43 +229,27 @@
               <h4>SMK Cinta Kasih Tzu Chi</h4>
               <h5>2019 - 2022</h5>
               <p><em>RPL (Rekayasa Perangkat Lunak) / Software Engineering</em></p>
+              <ul>
+                <li>OSIS (Student Council) Member</li>
+                <li>Tzu Shao IT Team</li>
+              </ul>
             </div>
             <div class="resume-item">
               <h4>Universitas Esa Unggul</h4>
               <h5>2022 - 2026</h5>
               <p><em>Teknik Informatika / Computer Science</em></p>
               <p><em>IPK : 3.80 (Cumlaude)</em></p>
-              <p></p>
-            </div>
-
-            <h3 class="resume-title">Badges</h3>
-            <div class="resume-item">
-              <h4>Data Analytics Essentials</h4>
-              <div data-iframe-width="250" data-iframe-height="270" data-share-badge-id="09e21557-498e-46d5-a6e7-d58d439fa8ec" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
-            </div>
-            <div class="resume-item">
-              <h4>Cyber Threat Management</h4>
-              <div data-iframe-width="250" data-iframe-height="270" data-share-badge-id="45972586-98ac-498c-bd6b-b8494a9241a4" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
-            </div>
-            <div class="resume-item">
-              <h4>AWS Cloud Quest: Generative AI Practitioner</h4>
-              <div data-iframe-width="250" data-iframe-height="270" data-share-badge-id="821e9725-153f-497f-8749-795a8f2454e4" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
-            </div>
-            <div class="resume-item">
-              <h4>Beyond the Basics: Istio and IBM Cloud Kubernetes Service</h4>
-              <div data-iframe-width="250" data-iframe-height="270" data-share-badge-id="f4d5d034-3940-4f53-a923-528c5ba09335" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
-            </div>
-            <div class="resume-item">
-              <h4>IBM Storage and Cloud Essentials</h4>
-              <div data-iframe-width="250" data-iframe-height="270" data-share-badge-id="89737c96-1cb2-4c8a-947f-a8625d0d93a6" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
-            </div>
-            <div class="resume-item">
-              <h4>IBM watsonx.governance: Technical Essentials</h4>
-              <div data-iframe-width="250" data-iframe-height="270" data-share-badge-id="07817c81-2b46-4619-9ebc-15cc0c0653f1" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
-              <p><em></em></p>
-              <p></p>
+              <ul>
+                <li>Implementation and Comparison of YOLO v8, v9, and v11 in Occupational Safety Regulations: Detecting Safety Helmet Usage in Construction Environments (2026)</li>
+                <li>Game Development – Tradisiman (2025)</li>
+                <li>Mobile Programming – Healthy App for Food Calorie Measurement (2024)</li>
+                <li>Object-Oriented Programming – GUI Application for Diagnosing Stunting and Wasting (2024)</li>
+                <li>Software Engineering – Rooster Rumble (2024).</li>
+              </ul>
             </div>
           </div>
+
+          <!-- Kolom Kanan: Professional Experience -->
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
             <h3 class="resume-title">Professional Experience</h3>
             <div class="resume-item">
@@ -280,11 +276,110 @@
               </ul>
             </div>
           </div>
-          <br>
+        </div>
+
+        <!-- Bagian Badges dengan Nama -->
+        <div class="row" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-lg-12">
+            <h3 class="resume-title">Badges</h3>
+            <div class="swiper badge-slider" style="overflow: hidden; padding: 20px 0 40px 0;">
+              <div class="swiper-wrapper">
+                
+                <!-- Slide 1 -->
+                <div class="swiper-slide">
+                  <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+                    <div data-iframe-width="250" data-iframe-height="270" data-share-badge-id="09e21557-498e-46d5-a6e7-d58d439fa8ec" data-share-badge-host="https://www.credly.com"></div>
+                    <h5 style="margin-top: 15px; font-size: 16px; font-weight: 600;">Data Analytics Essentials</h5>
+                  </div>
+                </div>
+                
+                <!-- Slide 2 -->
+                <div class="swiper-slide">
+                  <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+                    <div data-iframe-width="250" data-iframe-height="270" data-share-badge-id="45972586-98ac-498c-bd6b-b8494a9241a4" data-share-badge-host="https://www.credly.com"></div>
+                    <h5 style="margin-top: 15px; font-size: 16px; font-weight: 600;">Cyber Threat Management</h5>
+                  </div>
+                </div>
+                
+                <!-- Slide 3 -->
+                <div class="swiper-slide">
+                  <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+                    <div data-iframe-width="250" data-iframe-height="270" data-share-badge-id="821e9725-153f-497f-8749-795a8f2454e4" data-share-badge-host="https://www.credly.com"></div>
+                    <h5 style="margin-top: 15px; font-size: 16px; font-weight: 600;">AWS Cloud Quest: Generative AI Practitioner</h5>
+                  </div>
+                </div>
+                
+                <!-- Slide 4 -->
+                <div class="swiper-slide">
+                  <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+                    <div data-iframe-width="250" data-iframe-height="270" data-share-badge-id="f4d5d034-3940-4f53-a923-528c5ba09335" data-share-badge-host="https://www.credly.com"></div>
+                    <h5 style="margin-top: 15px; font-size: 16px; font-weight: 600;">Istio and IBM Cloud Kubernetes Service</h5>
+                  </div>
+                </div>
+                
+                <!-- Slide 5 -->
+                <div class="swiper-slide">
+                  <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+                    <div data-iframe-width="250" data-iframe-height="270" data-share-badge-id="89737c96-1cb2-4c8a-947f-a8625d0d93a6" data-share-badge-host="https://www.credly.com"></div>
+                    <h5 style="margin-top: 15px; font-size: 16px; font-weight: 600;">IBM Storage and Cloud Essentials</h5>
+                  </div>
+                </div>
+                
+                <!-- Slide 6 -->
+                <div class="swiper-slide">
+                  <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+                    <div data-iframe-width="250" data-iframe-height="270" data-share-badge-id="07817c81-2b46-4619-9ebc-15cc0c0653f1" data-share-badge-host="https://www.credly.com"></div>
+                    <h5 style="margin-top: 15px; font-size: 16px; font-weight: 600;">IBM watsonx.governance Essentials</h5>
+                  </div>
+                </div>
+
+              </div>
+              <!-- Navigasi Dots -->
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
         </div>
 
       </div>
-    </section><!-- End Resume Section -->
+    </section>
+
+    <!-- JS Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        new Swiper('.badge-slider', {
+          speed: 800,
+          loop: true,
+          autoplay: {
+            delay: 3500,
+            disableOnInteraction: false
+          },
+          slidesPerView: 1,
+          spaceBetween: 30,
+          pagination: {
+            el: '.swiper-pagination',
+            type: 'bullets',
+            clickable: true
+          },
+          breakpoints: {
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 30
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 30
+            },
+            1400: {
+              slidesPerView: 4,
+              spaceBetween: 30
+            }
+          }
+        });
+      });
+    </script>
 
     <!-- ======= certificate Section ======= -->
     <section id="certificate" class="certificate section-bg">

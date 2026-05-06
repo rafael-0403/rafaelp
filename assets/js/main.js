@@ -297,6 +297,7 @@
     }
   });
 
+  
   /**
    * Animation on scroll
    */
@@ -315,3 +316,4 @@
   new PureCounter();
 
 })()
+
