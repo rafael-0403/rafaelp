@@ -165,7 +165,114 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') lbPrev();
 });
 
-/* ─── BADGE SLIDER ─── */
+
+/* ─── GITHUB REPOS ─── */
+const GITHUB_USER = 'rafael-0403';
+
+const langColors = {
+  JavaScript: '#f1e05a', Python: '#3572A5', PHP: '#4F5D95',
+  HTML: '#e34c26', CSS: '#563d7c', TypeScript: '#3178c6',
+  Java: '#b07219', Kotlin: '#A97BFF', Dart: '#00B4AB',
+  'C#': '#178600', 'C++': '#f34b7d', Shell: '#89e051',
+  Vue: '#41b883', Swift: '#fa7343', Go: '#00ADD8', Rust: '#dea584',
+};
+
+function ghTimeAgo(dateStr) {
+  const s = Math.floor((Date.now() - new Date(dateStr)) / 1000);
+  if (s < 60) return 'just now';
+  if (s < 3600) return Math.floor(s/60) + 'm ago';
+  if (s < 86400) return Math.floor(s/3600) + 'h ago';
+  if (s < 2592000) return Math.floor(s/86400) + 'd ago';
+  if (s < 31536000) return Math.floor(s/2592000) + 'mo ago';
+  return Math.floor(s/31536000) + 'y ago';
+}
+
+function renderGhCard(repo) {
+  const color = langColors[repo.language] || '#8b949e';
+  return `
+    <a class="gh-card rv" href="${repo.html_url}" target="_blank" rel="noopener">
+      <div class="gh-card-top">
+        <div class="gh-name">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8Z"/></svg>
+          ${repo.name}
+        </div>
+        ${repo.fork ? '<span class="gh-fork">Fork</span>' : ''}
+      </div>
+      ${repo.description ? `<div class="gh-desc">${repo.description}</div>` : '<div class="gh-desc" style="color:var(--t3);font-style:italic">No description</div>'}
+      <div class="gh-meta">
+        ${repo.language ? `<span class="gh-lang"><span class="gh-langdot" style="background:${color}"></span>${repo.language}</span>` : ''}
+        <span class="gh-stat">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg>
+          ${repo.stargazers_count}
+        </span>
+        <span class="gh-stat">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/></svg>
+          ${repo.forks_count}
+        </span>
+        <span class="gh-updated">${ghTimeAgo(repo.pushed_at)}</span>
+      </div>
+    </a>`;
+}
+
+// Pinned repos — urutan sesuai keinginan
+const PINNED_REPOS = [
+  'EduCharacter-AI',
+  'marosa',
+  'tradisiman',
+  'project_pengukuran_psikologi',
+  'pengaduanmasyarakat',
+  'Seed-Faker',
+];
+
+async function loadGithub() {
+  const grid = document.getElementById('ghGrid');
+  const repoCountEl = document.getElementById('ghRepoCount');
+  const followersEl = document.getElementById('ghFollowers');
+  const starsEl = document.getElementById('ghStars');
+
+  try {
+    // Fetch user info + each pinned repo in parallel
+    const [userRes, ...repoResults] = await Promise.all([
+      fetch(`https://api.github.com/users/${GITHUB_USER}`),
+      ...PINNED_REPOS.map(name =>
+        fetch(`https://api.github.com/repos/${GITHUB_USER}/${name}`)
+      )
+    ]);
+
+    const user = await userRes.json();
+    const repos = await Promise.all(repoResults.map(r => r.json()));
+
+    // Stats dari user API
+    repoCountEl.textContent = user.public_repos ?? '—';
+    followersEl.textContent = user.followers ?? '—';
+
+    // Total stars dari semua repo publik (fetch semua repo)
+    const allReposRes = await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100`);
+    const allRepos = await allReposRes.json();
+    const totalStars = Array.isArray(allRepos)
+      ? allRepos.reduce((s, r) => s + r.stargazers_count, 0)
+      : '—';
+    starsEl.textContent = totalStars;
+
+    // Render hanya pinned repos (urutan terjaga)
+    const validRepos = repos.filter(r => r && r.name);
+    if (validRepos.length === 0) {
+      grid.innerHTML = '<div class="gh-error">No repositories found.</div>';
+      return;
+    }
+
+    grid.innerHTML = validRepos.map(renderGhCard).join('');
+
+    // Trigger reveal animation
+    grid.querySelectorAll('.rv').forEach(el => ro.observe(el));
+
+  } catch (err) {
+    grid.innerHTML = `<div class="gh-error">Could not load repositories. <a href="https://github.com/${GITHUB_USER}?tab=repositories" target="_blank" style="color:var(--accent)">View on GitHub →</a></div>`;
+  }
+}
+
+loadGithub();
+
 const badgeSwiper = new Swiper('.badge-slider', {
   slidesPerView: 1,
   spaceBetween: 20,
