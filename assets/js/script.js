@@ -62,21 +62,26 @@ document.addEventListener('click', e => {
   if (!nu.contains(e.target) && e.target !== mbBtn) nu.classList.remove('open');
 });
 
-/* ─── ACTIVE NAV ─── */
+/* ─── ACTIVE NAV + BACK TO TOP (throttled, merged) ─── */
 const secs = document.querySelectorAll('section[id]');
 const nls = document.querySelectorAll('.nl');
-window.addEventListener('scroll', () => {
-  const pos = window.scrollY + 130;
-  secs.forEach(s => {
-    if (pos >= s.offsetTop && pos < s.offsetTop + s.offsetHeight) {
-      nls.forEach(a => a.classList.toggle('act', a.getAttribute('href') === '#' + s.id));
-    }
-  });
-});
-
-/* ─── BACK TO TOP ─── */
 const btt = document.getElementById('btt');
-window.addEventListener('scroll', () => btt.classList.toggle('v', window.scrollY > 300));
+let scrollTicking = false;
+
+window.addEventListener('scroll', () => {
+  if (scrollTicking) return;
+  scrollTicking = true;
+  requestAnimationFrame(() => {
+    const pos = window.scrollY + 130;
+    secs.forEach(s => {
+      if (pos >= s.offsetTop && pos < s.offsetTop + s.offsetHeight) {
+        nls.forEach(a => a.classList.toggle('act', a.getAttribute('href') === '#' + s.id));
+      }
+    });
+    btt.classList.toggle('v', window.scrollY > 300);
+    scrollTicking = false;
+  });
+}, { passive: true });
 
 /* ─── REVEAL ON SCROLL ─── */
 const ro = new IntersectionObserver(es => {
@@ -231,7 +236,7 @@ async function loadGithub() {
   const starsEl = document.getElementById('ghStars');
 
   try {
-    // Fetch user info + each pinned repo in parallel
+    // Fetch user info + each pinned repo in parallel — single round trip
     const [userRes, ...repoResults] = await Promise.all([
       fetch(`https://api.github.com/users/${GITHUB_USER}`),
       ...PINNED_REPOS.map(name =>
@@ -242,20 +247,14 @@ async function loadGithub() {
     const user = await userRes.json();
     const repos = await Promise.all(repoResults.map(r => r.json()));
 
-    // Stats dari user API
+    // Stats
     repoCountEl.textContent = user.public_repos ?? '—';
     followersEl.textContent = user.followers ?? '—';
 
-    // Total stars dari semua repo publik (fetch semua repo)
-    const allReposRes = await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100`);
-    const allRepos = await allReposRes.json();
-    const totalStars = Array.isArray(allRepos)
-      ? allRepos.reduce((s, r) => s + r.stargazers_count, 0)
-      : '—';
-    starsEl.textContent = totalStars;
-
-    // Render hanya pinned repos (urutan terjaga)
+    // Stars dari pinned repos saja (tidak perlu fetch 100 repo ekstra)
     const validRepos = repos.filter(r => r && r.name);
+    const totalStars = validRepos.reduce((s, r) => s + (r.stargazers_count || 0), 0);
+    starsEl.textContent = totalStars;
     if (validRepos.length === 0) {
       grid.innerHTML = '<div class="gh-error">No repositories found.</div>';
       return;
