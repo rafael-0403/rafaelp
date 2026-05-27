@@ -289,3 +289,258 @@ const badgeSwiper = new Swiper('.badge-slider', {
     800: { slidesPerView: 3 },
   }
 });
+
+/* ─── HERO CANVAS BACKGROUND ─── */
+(function () {
+  const canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  // ── Config ──
+  const COLS = [
+    '#0A84FF', '#5AC8FA', '#30D158', '#BF5AF2',
+    '#FF9F0A', '#FF375F', '#64D2FF', '#ffffff'
+  ];
+  const isDark = () => document.documentElement.dataset.theme !== 'light';
+
+  // ── Resize ──
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+
+  // ── Particle class ──
+  class Particle {
+    constructor() { this.reset(true); }
+    reset(init = false) {
+      this.x  = Math.random() * canvas.width;
+      this.y  = init ? Math.random() * canvas.height : canvas.height + 10;
+      this.vx = (Math.random() - 0.5) * 0.4;
+      this.vy = -(0.3 + Math.random() * 0.8);
+      this.size   = 1 + Math.random() * 2;
+      this.alpha  = 0;
+      this.maxAlpha = 0.15 + Math.random() * 0.45;
+      this.fadeIn = true;
+      this.color  = COLS[Math.floor(Math.random() * COLS.length)];
+      this.glyph  = null;
+      // ~25% chance to be a code glyph
+      if (Math.random() < 0.25) {
+        const glyphs = [
+          '{', '}', '<', '>', '/', '*', '#', '0', '1',
+          '=>', '&&', '||', '()', '[]', ';;', '::',
+          'λ', 'Σ', '∞', '⌘', '⚡', '▲', '◆', '●'
+        ];
+        this.glyph = glyphs[Math.floor(Math.random() * glyphs.length)];
+        this.size  = 9 + Math.random() * 10;
+      }
+    }
+    update() {
+      this.x += this.vx + Math.sin(Date.now() * 0.0006 + this.y * 0.01) * 0.18;
+      this.y += this.glyph ? this.vy * 2.5 : this.vy;
+      if (this.fadeIn) {
+        this.alpha += 0.008;
+        if (this.alpha >= this.maxAlpha) this.fadeIn = false;
+      } else {
+        this.alpha -= 0.003;
+      }
+      if (this.alpha <= 0 || this.y < -40) this.reset();
+    }
+    draw() {
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, this.alpha);
+      ctx.fillStyle   = this.color;
+      if (this.glyph) {
+        ctx.font = `${this.size}px 'Courier New', monospace`;
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur  = 8;
+        ctx.fillText(this.glyph, this.x, this.y);
+      } else {
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur  = 12;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+  }
+
+  // ── Neural network nodes ──
+  class Node {
+    constructor() { this.reset(); }
+    reset() {
+      this.x  = Math.random() * canvas.width;
+      this.y  = Math.random() * canvas.height;
+      this.vx = (Math.random() - 0.5) * 0.25;
+      this.vy = (Math.random() - 0.5) * 0.25;
+      this.r  = 1.5 + Math.random() * 2;
+      this.color = COLS[Math.floor(Math.random() * 4)];
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0 || this.x > canvas.width)  this.vx *= -1;
+      if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+    }
+    draw() {
+      ctx.save();
+      ctx.globalAlpha = 0.55;
+      ctx.fillStyle = this.color;
+      ctx.shadowColor = this.color;
+      ctx.shadowBlur  = 10;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  // ── Init ──
+  const PARTICLE_COUNT = Math.min(140, Math.floor(canvas.width * canvas.height / 9000));
+  const NODE_COUNT     = 38;
+  const particles = Array.from({ length: PARTICLE_COUNT }, () => new Particle());
+  const nodes     = Array.from({ length: NODE_COUNT },     () => new Node());
+  const CONNECT_DIST = 130;
+
+  // ── Flowing gradient mesh ──
+  let t = 0;
+  function drawMesh() {
+    t += 0.004;
+    const w = canvas.width, h = canvas.height;
+    const dark = isDark();
+
+    // Base gradient
+    const bg = ctx.createRadialGradient(
+      w * (0.3 + 0.15 * Math.sin(t)),
+      h * (0.35 + 0.12 * Math.cos(t * 0.8)),
+      0,
+      w * 0.5, h * 0.5,
+      Math.max(w, h) * 0.85
+    );
+    if (dark) {
+      bg.addColorStop(0,   'rgba(13,26,46,1)');
+      bg.addColorStop(0.4, 'rgba(9,9,15,1)');
+      bg.addColorStop(1,   'rgba(9,9,15,1)');
+    } else {
+      bg.addColorStop(0,   'rgba(219,234,254,1)');
+      bg.addColorStop(0.5, 'rgba(237,233,254,1)');
+      bg.addColorStop(1,   'rgba(232,240,254,1)');
+    }
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, w, h);
+
+    // Accent orb 1 — blue
+    const g1 = ctx.createRadialGradient(
+      w * (0.15 + 0.1 * Math.cos(t * 0.7)),
+      h * (0.2  + 0.08 * Math.sin(t)),
+      0,
+      w * 0.2, h * 0.3,
+      w * 0.48
+    );
+    g1.addColorStop(0, dark ? 'rgba(10,132,255,0.28)' : 'rgba(10,132,255,0.12)');
+    g1.addColorStop(1, 'transparent');
+    ctx.fillStyle = g1;
+    ctx.fillRect(0, 0, w, h);
+
+    // Accent orb 2 — purple
+    const g2 = ctx.createRadialGradient(
+      w * (0.82 + 0.08 * Math.sin(t * 0.9)),
+      h * (0.75 + 0.07 * Math.cos(t * 1.1)),
+      0,
+      w * 0.8, h * 0.7,
+      w * 0.42
+    );
+    g2.addColorStop(0, dark ? 'rgba(191,90,242,0.22)' : 'rgba(191,90,242,0.10)');
+    g2.addColorStop(1, 'transparent');
+    ctx.fillStyle = g2;
+    ctx.fillRect(0, 0, w, h);
+
+    // Accent orb 3 — green
+    const g3 = ctx.createRadialGradient(
+      w * (0.55 + 0.06 * Math.cos(t * 1.3)),
+      h * (0.45 + 0.06 * Math.sin(t * 0.6)),
+      0,
+      w * 0.5, h * 0.5,
+      w * 0.32
+    );
+    g3.addColorStop(0, dark ? 'rgba(48,209,88,0.13)' : 'rgba(48,209,88,0.08)');
+    g3.addColorStop(1, 'transparent');
+    ctx.fillStyle = g3;
+    ctx.fillRect(0, 0, w, h);
+
+    // Accent orb 4 — amber
+    const g4 = ctx.createRadialGradient(
+      w * (0.75 + 0.1 * Math.sin(t * 0.5)),
+      h * (0.18 + 0.07 * Math.cos(t * 1.2)),
+      0,
+      w * 0.7, h * 0.2,
+      w * 0.28
+    );
+    g4.addColorStop(0, dark ? 'rgba(255,159,10,0.15)' : 'rgba(255,159,10,0.08)');
+    g4.addColorStop(1, 'transparent');
+    ctx.fillStyle = g4;
+    ctx.fillRect(0, 0, w, h);
+  }
+
+  // ── Draw connections ──
+  function drawConnections() {
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const d  = Math.sqrt(dx * dx + dy * dy);
+        if (d < CONNECT_DIST) {
+          ctx.save();
+          ctx.globalAlpha = (1 - d / CONNECT_DIST) * (isDark() ? 0.18 : 0.1);
+          const grad = ctx.createLinearGradient(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y);
+          grad.addColorStop(0, nodes[i].color);
+          grad.addColorStop(1, nodes[j].color);
+          ctx.strokeStyle = grad;
+          ctx.lineWidth   = 0.7;
+          ctx.shadowColor = nodes[i].color;
+          ctx.shadowBlur  = 4;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
+          ctx.restore();
+        }
+      }
+    }
+  }
+
+  // ── Scanline vignette overlay ──
+  function drawVignette() {
+    const w = canvas.width, h = canvas.height;
+    const vig = ctx.createRadialGradient(w/2, h/2, h * 0.25, w/2, h/2, h * 0.9);
+    vig.addColorStop(0, 'transparent');
+    vig.addColorStop(1, isDark() ? 'rgba(0,0,0,0.55)' : 'rgba(0,0,0,0.12)');
+    ctx.fillStyle = vig;
+    ctx.fillRect(0, 0, w, h);
+  }
+
+  // ── Main loop ──
+  let raf;
+  function loop() {
+    drawMesh();
+    drawConnections();
+    nodes.forEach(n => { n.update(); n.draw(); });
+    particles.forEach(p => { p.update(); p.draw(); });
+    drawVignette();
+    raf = requestAnimationFrame(loop);
+  }
+  loop();
+
+  // ── React to theme toggle ──
+  const observer = new MutationObserver(() => {});
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+  // ── Pause when off-screen ──
+  const io = new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) { if (!raf) loop(); }
+    else { cancelAnimationFrame(raf); raf = null; }
+  }, { threshold: 0 });
+  io.observe(canvas);
+})();

@@ -37,10 +37,7 @@
 
 <!-- HERO -->
 <section id="hero">
-  <div class="orb o1" style="z-index:1"></div>
-  <div class="orb o2" style="z-index:1"></div>
-  <div class="orb o3" style="z-index:1"></div>
-  <div class="orb o4" style="z-index:1"></div>
+  <canvas id="heroCanvas"></canvas>
   <div class="hc">
     <div class="badge"><span class="bdot"></span>Available for opportunities</div>
     <h1 class="hname">Rafael Praseli</h1>
@@ -188,6 +185,34 @@
       </div>
     </div>
 
+    <!-- CERTIFICATES LIST -->
+    <div class="certlist-section rv" style="margin-top: 64px;">
+      <div class="rct">📜 Certificates</div>
+      <div class="certlist-grid">
+
+        <div class="certlist-item rv"><span class="certlist-year">2026</span><span class="certlist-name">IBM watsonx.governance: Technical Essentials</span><span class="certlist-issuer">IBM</span></div>
+        <div class="certlist-item rv"><span class="certlist-year">2026</span><span class="certlist-name">IBM Storage and Cloud Essentials</span><span class="certlist-issuer">IBM</span></div>
+        <div class="certlist-item rv"><span class="certlist-year">2026</span><span class="certlist-name">Beyond the Basics: Istio and IBM Cloud Kubernetes Service</span><span class="certlist-issuer">IBM</span></div>
+        <div class="certlist-item rv"><span class="certlist-year">2026</span><span class="certlist-name">HCCDA-AI Course</span><span class="certlist-issuer">Huawei</span></div>
+        <div class="certlist-item rv"><span class="certlist-year">2026</span><span class="certlist-name">HCIA-Storage V5.0 Course</span><span class="certlist-issuer">Huawei</span></div>
+        <div class="certlist-item rv"><span class="certlist-year">2026</span><span class="certlist-name">AWS Cloud Quest: Generative AI Practitioner</span><span class="certlist-issuer">Amazon Web Services</span></div>
+        <div class="certlist-item rv"><span class="certlist-year">2026</span><span class="certlist-name">AWS Well-Architected Proficient</span><span class="certlist-issuer">Amazon Web Services</span></div>
+        <div class="certlist-item rv"><span class="certlist-year">2026</span><span class="certlist-name">Cyber Threat Management</span><span class="certlist-issuer">Cisco</span></div>
+        <div class="certlist-item rv"><span class="certlist-year">2026</span><span class="certlist-name">Data Analytics Essentials</span><span class="certlist-issuer">Cisco</span></div>
+        <div class="certlist-item rv"><span class="certlist-year">2025</span><span class="certlist-name">EP-GDE 50</span><span class="certlist-issuer">Arizona State University</span></div>
+        <div class="certlist-item rv"><span class="certlist-year">2025</span><span class="certlist-name">IC-What is Innovation?</span><span class="certlist-issuer">Arizona State University</span></div>
+        <div class="certlist-item rv"><span class="certlist-year">2023</span><span class="certlist-name">Beyond ASEAN 2023: Fostering Meaningful Youth Participation</span><span class="certlist-issuer">ASEAN</span></div>
+        <div class="certlist-item rv"><span class="certlist-year">2023</span><span class="certlist-name">ASEAN Youth Leading Series</span><span class="certlist-issuer">ASEAN</span></div>
+        <div class="certlist-item rv"><span class="certlist-year">2023</span><span class="certlist-name">Cyber Security: An Urgent Call for The Heroes</span><span class="certlist-issuer">Badan Siber dan Sandi Negara</span></div>
+        <div class="certlist-item rv"><span class="certlist-year">2023</span><span class="certlist-name">61st United Nations Commission for Social Development</span><span class="certlist-issuer">United Nations</span></div>
+        <div class="certlist-item rv"><span class="certlist-year">2022</span><span class="certlist-name">Software Engineering Competency Certificate</span><span class="certlist-issuer">BNSP</span></div>
+        <div class="certlist-item rv"><span class="certlist-year">2021</span><span class="certlist-name">JavaScript Course</span><span class="certlist-issuer">Progate</span></div>
+        <div class="certlist-item rv"><span class="certlist-year">2021</span><span class="certlist-name">Python Course</span><span class="certlist-issuer">Progate</span></div>
+        <div class="certlist-item rv"><span class="certlist-year">2016</span><span class="certlist-name">BSW SmartSchool — Computer Skills Training</span><span class="certlist-issuer">BSW</span></div>
+
+      </div>
+    </div>
+
     <!-- BADGE SLIDER -->
     <div class="badge-section rv" style="margin-top: 64px;">
       <div class="rct">🏅 Badges &amp; Credentials</div>
@@ -196,42 +221,49 @@
 
           <div class="swiper-slide">
             <div class="badge-card">
-              <div data-iframe-width="200" data-iframe-height="220" data-share-badge-id="09e21557-498e-46d5-a6e7-d58d439fa8ec" data-share-badge-host="https://www.credly.com"></div>
+              <div data-iframe-width="200" data-iframe-height="270" data-share-badge-id="09e21557-498e-46d5-a6e7-d58d439fa8ec" data-share-badge-host="https://www.credly.com"></div>
               <h5 class="badge-title">Data Analytics Essentials</h5>
             </div>
           </div>
 
           <div class="swiper-slide">
             <div class="badge-card">
-              <div data-iframe-width="200" data-iframe-height="220" data-share-badge-id="45972586-98ac-498c-bd6b-b8494a9241a4" data-share-badge-host="https://www.credly.com"></div>
+              <div data-iframe-width="200" data-iframe-height="270" data-share-badge-id="45972586-98ac-498c-bd6b-b8494a9241a4" data-share-badge-host="https://www.credly.com"></div>
               <h5 class="badge-title">Cyber Threat Management</h5>
             </div>
           </div>
 
           <div class="swiper-slide">
             <div class="badge-card">
-              <div data-iframe-width="200" data-iframe-height="220" data-share-badge-id="821e9725-153f-497f-8749-795a8f2454e4" data-share-badge-host="https://www.credly.com"></div>
+              <div data-iframe-width="200" data-iframe-height="270" data-share-badge-id="595b44be-8309-4ed9-ab84-af0c09feff91" data-share-badge-host="https://www.credly.com"></div>
+              <h5 class="badge-title">AWS Well-Architected Proficient</h5>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="badge-card">
+              <div data-iframe-width="200" data-iframe-height="270" data-share-badge-id="821e9725-153f-497f-8749-795a8f2454e4" data-share-badge-host="https://www.credly.com"></div>
               <h5 class="badge-title">AWS Cloud Quest: Generative AI Practitioner</h5>
             </div>
           </div>
 
           <div class="swiper-slide">
             <div class="badge-card">
-              <div data-iframe-width="200" data-iframe-height="220" data-share-badge-id="f4d5d034-3940-4f53-a923-528c5ba09335" data-share-badge-host="https://www.credly.com"></div>
+              <div data-iframe-width="200" data-iframe-height="270" data-share-badge-id="f4d5d034-3940-4f53-a923-528c5ba09335" data-share-badge-host="https://www.credly.com"></div>
               <h5 class="badge-title">Istio and IBM Cloud Kubernetes Service</h5>
             </div>
           </div>
 
           <div class="swiper-slide">
             <div class="badge-card">
-              <div data-iframe-width="200" data-iframe-height="220" data-share-badge-id="89737c96-1cb2-4c8a-947f-a8625d0d93a6" data-share-badge-host="https://www.credly.com"></div>
+              <div data-iframe-width="200" data-iframe-height="270" data-share-badge-id="89737c96-1cb2-4c8a-947f-a8625d0d93a6" data-share-badge-host="https://www.credly.com"></div>
               <h5 class="badge-title">IBM Storage and Cloud Essentials</h5>
             </div>
           </div>
 
           <div class="swiper-slide">
             <div class="badge-card">
-              <div data-iframe-width="200" data-iframe-height="220" data-share-badge-id="07817c81-2b46-4619-9ebc-15cc0c0653f1" data-share-badge-host="https://www.credly.com"></div>
+              <div data-iframe-width="200" data-iframe-height="270" data-share-badge-id="07817c81-2b46-4619-9ebc-15cc0c0653f1" data-share-badge-host="https://www.credly.com"></div>
               <h5 class="badge-title">IBM watsonx.governance Essentials</h5>
             </div>
           </div>
@@ -424,6 +456,11 @@
 
       <div class="cc rv" onclick="lb('assets/img/certificate/DL08015G IBM Storage and Cloud_Course completion certificate.jpg')">
         <img src="assets/img/certificate/DL08015G IBM Storage and Cloud_Course completion certificate.jpg" alt="IBM Storage">
+        <div class="ch">🔍</div>
+      </div>
+
+      <div class="cc rv" onclick="lb('assets/img/certificate/AWS Well-Architected.jpg')">
+        <img src="assets/img/certificate/AWS Well-Architected.jpg" alt="IBM Storage">
         <div class="ch">🔍</div>
       </div>
 
