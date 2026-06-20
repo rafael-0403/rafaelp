@@ -350,10 +350,15 @@ footer{padding:36px 0;text-align:center;border-top:1px solid var(--bd)}
 /* ─── CERTIFICATES LIST ─── */
 .certlist-section { margin-top: 64px; }
 .certlist-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 8px;
   margin-top: 8px;
+}
+@media(max-width: 700px) {
+  .certlist-grid {
+    grid-template-columns: 1fr;
+  }
 }
 .certlist-item {
   display: grid;
